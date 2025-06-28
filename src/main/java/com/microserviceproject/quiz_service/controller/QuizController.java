@@ -1,12 +1,11 @@
-package com.mymicroservice.quizapp.controller;
+package com.microserviceproject.quiz_service.controller;
 
-import com.mymicroservice.quizapp.model.Question;
-import com.mymicroservice.quizapp.model.QuestionWrapper;
-import com.mymicroservice.quizapp.model.Response;
-import com.mymicroservice.quizapp.service.QuizService;
+
+import com.microserviceproject.quiz_service.model.QuestionWrapper;
+import com.microserviceproject.quiz_service.model.QuizDto;
+import com.microserviceproject.quiz_service.model.Response;
+import com.microserviceproject.quiz_service.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +17,8 @@ public class QuizController {
     @Autowired
     QuizService quizService;
     @PostMapping("create")
-    public ResponseEntity<String> createQuiz(@RequestParam String category,@RequestParam int numQ,@RequestParam String title){
-        return quizService.createQuiz(category,numQ,title);
+    public ResponseEntity<String> createQuiz(@RequestBody QuizDto quizDto){
+        return quizService.createQuiz(quizDto.getCategoryName(),quizDto.getNumQuestions(),quizDto.getTitle());
     }
     @GetMapping("get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Integer id){

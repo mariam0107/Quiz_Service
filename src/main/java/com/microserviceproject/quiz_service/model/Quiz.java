@@ -1,22 +1,26 @@
-package com.mymicroservice.quizapp.model;
+package com.microserviceproject.quiz_service.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import org.aspectj.weaver.patterns.TypePatternQuestions;
 
 import java.util.List;
 
 @Entity
+@Data
 public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
-    @ManyToMany
-    private List<Question> questions;
 
-    public Quiz(Integer id, String title, List<Question> questions) {
+    @ElementCollection
+    private List<Integer> questionIds;
+
+    public Quiz(Integer id, String title, List<Integer> questionIds) {
         this.id = id;
         this.title = title;
-        this.questions = questions;
+        this.questionIds = questionIds;
     }
 
     public Quiz() {
@@ -38,11 +42,11 @@ public class Quiz {
         this.title = title;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public List<Integer> getQuestionIds() {
+        return questionIds;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setQuestionIds(List<Integer> questionIds) {
+        this.questionIds = questionIds;
     }
 }

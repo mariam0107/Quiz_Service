@@ -1,4 +1,4 @@
-package com.mymicroservice.quizapp.model;
+package com.microserviceproject.quiz_service.model;
 
 public class QuestionWrapper {
     private Integer id;
